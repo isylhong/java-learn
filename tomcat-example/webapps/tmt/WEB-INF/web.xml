@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <listener>
+        <listener-class>com.autumn.learn.tmt.listener.MyListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>myServletA</servlet-name>
+        <servlet-class>com.autumn.learn.tmt.servlet.MyServletA</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>myServletA</servlet-name>
+        <url-pattern>/s1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>myServletB</servlet-name>
+        <servlet-class>com.autumn.learn.tmt.servlet.MyServletB</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>myServletB</servlet-name>
+        <url-pattern>/s2</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>myFilter</filter-name>
+        <filter-class>com.autumn.learn.tmt.filter.MyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>myFilter</filter-name>
+        <url-pattern>/s1</url-pattern>
+    </filter-mapping>
+
+    <!--    <servlet-mapping> &lt;!&ndash; 未配置这个将导致无法直接访问位于webapp目录下非WEB-INF目录内的html资源文件 &ndash;&gt;-->
+    <!--        <servlet-name>default</servlet-name>-->
+    <!--        <url-pattern>*.html</url-pattern>-->
+    <!--    </servlet-mapping>-->
+</web-app>

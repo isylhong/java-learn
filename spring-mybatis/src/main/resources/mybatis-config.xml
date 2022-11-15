@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--
+        1、mybatis可以使用properties来引入外部properties配置文件的内容；
+        resource：引入类路径下的资源
+        url：引入网络路径或者磁盘路径下的资源
+    -->
+
+    <properties resource="dbconfig.properties"/>
+
+    <!--
+        2、settings包含很多重要的设置项
+        setting:用来设置每一个设置项
+            name：设置项名
+            value：设置项取值
+     -->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <environments default="dev_mysql">
+        <environment id="dev_mysql">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mapper/EmployeeMapper.xml"/>
+        <mapper class="com.autumn.learn.mybatis.dao.EmployeeMapperAnnotation"/>
+    </mappers>
+</configuration>

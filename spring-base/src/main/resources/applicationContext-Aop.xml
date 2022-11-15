@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--    <context:component-scan base-package="com.autumn.learn.spring.aop"/>-->
+
+    <!-- 开启基于注解的AOP功能，作用等同于@EnableAspectJAutoProxy注解 -->
+    <!--    <aop:aspectj-autoproxy/>-->
+
+    <bean id="myService" class="com.autumn.learn.spring.aop.MyService"/>
+    <bean id="myAspect" class="com.autumn.learn.spring.aop.MyAspect"/>
+
+    <!-- 切面定义，两种方法
+    方法一：配置文件方式。配置文件中<aop:config>标签内定义PointCut、Advice、Aspect。
+    方法二：Java注解方式。使用@Aspect注解定义PointCut、Advice、Aspect。
+    -->
+    <aop:config>
+        <aop:pointcut id="myPointCut" expression="execution(public * com.autumn.learn.spring.aop.MyService.*(..))"/>
+        <aop:aspect ref="myAspect" order="1">
+            <aop:around method="aroundAdvice" pointcut-ref="myPointCut"/>
+            <aop:before method="beforeAdvice" pointcut-ref="myPointCut"/>
+            <aop:after method="afterAdvice" pointcut-ref="myPointCut"/>
+            <aop:after-returning method="afterReturningAdvice" pointcut-ref="myPointCut" returning="result"/>
+            <aop:after-throwing method="afterThrowingAdvice" pointcut-ref="myPointCut" throwing="e"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

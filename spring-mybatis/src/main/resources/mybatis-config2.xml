@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 相对类路径 -->
+    <properties resource="com/autumn/learn/mybatis/dataSource.properties"/>
+    <!--    <properties>-->
+    <!--        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
+    <!--        <property name="url"-->
+    <!--                  value="jdbc:mysql://localhost:3306/study_mybatis?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC"/>-->
+    <!--        <property name="username" value="root"/>-->
+    <!--        <property name="password" value="123456"/>-->
+    <!--    </properties>-->
+
+    <settings>
+        <!-- <setting name="logImpl" value="STDOUT_LOGGING"/> -->
+        <!-- 开始使用Log4j日志框架 -->
+        <setting name="logImpl" value="LOG4J"/>
+        <!-- 开启数据库字段下划线命名到驼峰名字得映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <environments default="mysql">
+        <environment id="mysql">
+            <!-- transactionManager.type也可填JdbcTransactionFactory的别名JDBC，mybatis在Configuration对象创建的时候默认添加了一系列对象的别名 -->
+            <transactionManager type="org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory"/>
+            <!-- dataSource.type也可填UnpooledDataSourceFactory的别名UNPOOLED，这里我选择不适用dataSource连接池 -->
+            <dataSource type="org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory">
+                <!--                <property name="driver" value="com.mysql.cj.jdbc.Driver"/> -->
+                <!--                <property name="url" value="jdbc:mysql://localhost:3306/study_mybatis?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC"/> -->
+                <!--                <property name="username" value="root"/> -->
+                <!--                <property name="password" value="123456"/>  -->
+                <property name="driver" value="${jdbc.driverClass}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/autumn/learn/mybatis/mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>

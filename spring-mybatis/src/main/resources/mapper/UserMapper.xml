@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autumn.learn.mybatis.dao.UserDao">
+    <resultMap id="UserResultMap" type="com.autumn.learn.mybatis.domain.User">
+        <id property="id" column="id"/>
+        <result property="userNumber" column="user_number"/>
+        <result property="username" column="username"/>
+    </resultMap>
+
+    <select id="findUser" resultMap="UserResultMap">
+        select *
+        from tbl_user
+        where user_number = #{user.userNumber}
+    </select>
+
+    <select id="listUser" resultMap="UserResultMap">
+        select * from tbl_user
+    </select>
+
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_user(user_number, username)
+        values (#{user.userNumber}, #{user.username})
+    </insert>
+
+    <delete id="deleteUser">
+        delete
+        from tbl_user
+        where user_number = #{user.userNumber}
+    </delete>
+
+    <update id="updateUser">
+        update tbl_user
+        <set>
+            <if test="#{user.username} != null and #{user.username} != ''">
+                username = #{user.username},
+            </if>
+        </set>
+        where user_number=#{user.userNumber}
+    </update>
+</mapper>

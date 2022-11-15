@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--status表示log4j2自身的日志打印级别，如trace会打印出log4j2加载、运行等信息, monitorinterval监控间隔，单位为秒-->
+<Configuration status="info" monitorinterval="6">
+
+    <!--定义变量-->
+    <Properties>
+        <Property name="nowDate">%date{yyyy-MM-dd}</Property>
+        <Property name="logDir">${sys:catalina.home}/logs/</Property>
+    </Properties>
+
+    <appenders>
+        <!--日志输出到控制台-->
+        <Console name="consoleAppender" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%date %logger %processId %threadId %method %class %file %highlight{%level} : %green{%msg} %n"/>
+        </Console>
+
+        <!--日志写入文件中-->
+        <!--<File name="fileAppender" fileName="log4j2Study_${date:yyyy-MM-dd}.log">-->
+        <!--<PatternLayout pattern="%date %logger %level : %msg%n" />-->
+        <!--</File>-->
+
+        <!--日志写入文件，根据自定义的滚动策略归档文件，filePattern定义日志文件归档格式-->
+        <RollingFile name="rollingFileAppender" fileName="log4j2_rollingFileAppender.log"
+                     filePattern="$${date:yyyy-MM}/%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%date %logger %level : %msg%n"/>
+            <!--定义滚动策略-->
+            <Policies>
+                <!--基于cron表达式触发归档-->
+                <CronTriggeringPolicy schedule="0 0 * * * ?"/>
+                <!--基于时间触发归档,与上文filePattern配合使用，当filePattern不符合时，就归档-->
+                <TimeBasedTriggeringPolicy/>
+                <!--基于文件大小触发归档-->
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+
+            <!--默认日志保留7天-->
+            <DefaultRolloverStrategy max="7"/>
+
+            <!--log4j 2.5引入，可更精细地控制删除日志策略-->
+            <DefaultRolloverStrategy>
+                <!--同时满足下述条件，进行删除-->
+                <Delete>
+                    <!--文件名符合.log.gz后缀-->
+                    <IfFileName glob="*.log.gz"/>
+                    <!--超过60天-->
+                    <IfLastModified age="60d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </appenders>
+
+    <!--定义日志输出配置-->
+
+    <loggers>
+        <!--控制指定包或类的日志输出（包括等级和目的地）, additivity表示日志信息是否向上传递，false为不传递（即不重复打印）-->
+        <logger name="com.autumn.log.Log4j2" level="false" additivity="false">
+            <AppenderRef ref="consoleAppender"/>
+        </logger>
+
+        <!--全局日志级别为info-->
+        <root level="info">
+            <!--日志输出到控制台和文件中-->
+            <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="fileAppender"/>
+        </root>
+    </loggers>
+</Configuration>

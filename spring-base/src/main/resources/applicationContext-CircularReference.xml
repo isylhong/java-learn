@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="id_C" class="com.autumn.learn.spring.domain.CC" scope="prototype">
+        <property name="c1" value="333"/>
+        <property name="c2" value="ccc"/>
+    </bean>
+
+    <bean id="id_B" class="com.autumn.learn.spring.domain.BB">
+        <property name="b1" value="bbb"/>
+        <property name="aa" ref="id_A"/>
+        <property name="cc" ref="id_C"/>
+    </bean>
+
+    <bean id="id_A" class="com.autumn.learn.spring.domain.AA">
+        <property name="a1" value="100"/>
+        <property name="bb" ref="id_B"/>
+    </bean>
+
+    <bean id="id_D" class="com.autumn.learn.spring.domain.AA.DD">
+        <property name="cc" ref="id_C"/>
+    </bean>
+</beans>

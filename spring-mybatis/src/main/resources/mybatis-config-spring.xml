@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- mybatis和spring整合时，可通过<context:property-placeholder/>标签加载数据源配置文件 -->
+    <!--    <properties resource="com/autumn/learn/mybatis/dataSource.properties"/>-->
+
+    <settings>
+        <!-- 开始使用Log4j日志框架 -->
+        <setting name="logImpl" value="LOG4J"/>
+        <!-- 开启数据库字段下划线命名到驼峰名字得映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- mybatis和spring整合时，不需要在mybatis全局配置文件中定义Environment。即使定义了，也会在SqlSessionFactoryBean中被新建的环境对象覆盖 -->
+    <!--    <environments default="mysql">
+            <environment id="mysql">
+                <transactionManager type="org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory"/>
+                <dataSource type="POOLED"/>
+            </environment>
+        </environments>-->
+</configuration>

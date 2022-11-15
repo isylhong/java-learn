@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.autumn.learn</groupId>
+        <artifactId>java-learn</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <packaging>pom</packaging>
+    <modules>
+        <module>log-jcl</module>
+        <module>log-slf4j</module>
+        <module>log-log4j</module>
+        <module>log-log4j2</module>
+    </modules>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>log</artifactId>
+
+    <properties>
+        <log4j.version>1.2.17</log4j.version>
+        <log4j2.version>2.12.1</log4j2.version>
+        <commons-logging.version>1.2</commons-logging.version>
+        <slf4j.version>1.7.32</slf4j.version>
+        <logback.version>1.2.6</logback.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- log4j单独使用，依赖包1个 -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <!-- log4j2单独使用，依赖包2个 -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
+
+            <!-- 日志门面jar包 jul -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons-logging.version}</version>
+            </dependency>
+
+            <!-- 日志门面jar包 slf4j -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+
+            <!-- slf4j + logback, 框架实现包-->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+
+
+            <!-- 适配包：slf4j + log4j2(日志实现) -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>2.14.1</version>
+            </dependency>
+
+            <!-- 适配包：slf4j + log4j(日志实现) -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.30</version>
+            </dependency>
+
+
+            <!-- 桥接包：log4j -> slf4j -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>log4j-over-slf4j</artifactId>
+                <version>1.7.32</version>
+            </dependency>
+
+            <!-- 桥接包：log4j2 -> slf4j -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-to-slf4j</artifactId>
+                <version>2.14.1</version>
+            </dependency>
+
+
+            <!-- 日志门面桥接包：slf4j -> jcl -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-jcl</artifactId>
+                <version>1.7.32</version>
+            </dependency>
+
+            <!-- 日志门面桥接包：jcl -> slf4j -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>1.7.32</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

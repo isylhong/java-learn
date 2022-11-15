@@ -1,0 +1,13 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: activemq-send
+  activemq:
+    broker-url: tcp://127.0.0.1:61616
+    in-memory: false    # true 表示使用内置的MQ，false则连接服务器
+    pool:
+      enabled: false    # true表示使用连接池；false时，每发送一条数据创建一个连接
+      max-connections: 10   # 连接池最大连接数
+      idle-timeout: 30000     # 空闲的连接过期时间，默认为30秒

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autumn.learn.mybatis.dao.EmployeeMapper">
+    <!--
+        select * from tb_employee where id = #{id}
+        数据库字段与bean属性名不同时,解决映射处理
+            1、给数据库字段起别名. last_name ==> lastName
+    -->
+    <select id="findEmployeeById" resultType="com.autumn.learn.mybatis.domain.Employee">
+        select * from tb_employee where id = #{id}
+    </select>
+</mapper>

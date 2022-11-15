@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>java-learn</artifactId>
+        <groupId>com.autumn.learn</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>mq-activemq</artifactId>
+    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <activemq.version>5.15.15</activemq.version>
+    </properties>
+
+    <modules>
+        <module>activemq5-simple</module>
+        <module>activemq5-spring</module>
+        <module>activemq5-boot-sender</module>
+        <module>activemq5-boot-receiver</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-all</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
+
+            <!-- spring要依赖的activemq-->
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-spring</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-activemq</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <!-- 使用springboot2.1及以下版本时候，activemq池依赖 -->
+            <!--        <dependency>-->
+            <!--            <groupId>org.apache.activemq</groupId>-->
+            <!--            <artifactId>activemq-pool</artifactId>-->
+            <!--            <version>5.15.12</version>-->
+            <!--        </dependency>-->
+
+            <!-- 使用springboot2.1+版本时候，activemq池依赖 -->
+            <dependency>
+                <groupId>org.messaginghub</groupId>
+                <artifactId>pooled-jms</artifactId>
+                <version>1.0.6</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
